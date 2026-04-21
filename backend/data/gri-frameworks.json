@@ -1,0 +1,146 @@
+[
+  { "id": "GRI-2-1", "category": "General", "title": "Organizational details" },
+  {
+    "id": "GRI-2-6",
+    "category": "General",
+    "title": "Activities, value chain, and other business relationships"
+  },
+  {
+    "id": "GRI-2-22",
+    "category": "General",
+    "title": "Statement on sustainable development strategy"
+  },
+  {
+    "id": "GRI-2-29",
+    "category": "General",
+    "title": "Approach to stakeholder engagement"
+  },
+
+  {
+    "id": "GRI-201-1",
+    "category": "Economic",
+    "title": "Direct economic value generated and distributed"
+  },
+  {
+    "id": "GRI-205-1",
+    "category": "Economic",
+    "title": "Operations assessed for corruption risks"
+  },
+  {
+    "id": "GRI-205-2",
+    "category": "Economic",
+    "title": "Anti-corruption policy training"
+  },
+
+  {
+    "id": "GRI-302-1",
+    "category": "Environmental",
+    "title": "Energy consumption within the organization"
+  },
+  {
+    "id": "GRI-302-3",
+    "category": "Environmental",
+    "title": "Energy intensity ratio"
+  },
+  {
+    "id": "GRI-302-4",
+    "category": "Environmental",
+    "title": "Reduction of energy consumption"
+  },
+  {
+    "id": "GRI-303-3",
+    "category": "Environmental",
+    "title": "Water withdrawal by source"
+  },
+  {
+    "id": "GRI-303-4",
+    "category": "Environmental",
+    "title": "Water discharge"
+  },
+  {
+    "id": "GRI-303-5",
+    "category": "Environmental",
+    "title": "Water consumption total"
+  },
+  {
+    "id": "GRI-305-1",
+    "category": "Environmental",
+    "title": "Scope 1 GHG emissions"
+  },
+  {
+    "id": "GRI-305-2",
+    "category": "Environmental",
+    "title": "Scope 2 GHG emissions"
+  },
+  {
+    "id": "GRI-305-3",
+    "category": "Environmental",
+    "title": "Scope 3 GHG emissions"
+  },
+  {
+    "id": "GRI-305-4",
+    "category": "Environmental",
+    "title": "GHG emissions intensity"
+  },
+  {
+    "id": "GRI-305-5",
+    "category": "Environmental",
+    "title": "Reduction of GHG emissions"
+  },
+  {
+    "id": "GRI-306-3",
+    "category": "Environmental",
+    "title": "Waste generated"
+  },
+  {
+    "id": "GRI-306-4",
+    "category": "Environmental",
+    "title": "Waste diverted from disposal"
+  },
+  {
+    "id": "GRI-306-5",
+    "category": "Environmental",
+    "title": "Waste directed to disposal"
+  },
+
+  {
+    "id": "GRI-401-1",
+    "category": "Social",
+    "title": "New employee hires and turnover"
+  },
+  {
+    "id": "GRI-403-2",
+    "category": "Social",
+    "title": "Hazard identification and incident investigation"
+  },
+  {
+    "id": "GRI-403-9",
+    "category": "Social",
+    "title": "Work-related injuries (rate and severity)"
+  },
+  {
+    "id": "GRI-404-1",
+    "category": "Social",
+    "title": "Average hours of training per year per employee"
+  },
+  {
+    "id": "GRI-405-1",
+    "category": "Social",
+    "title": "Diversity of governance bodies and employees"
+  },
+  {
+    "id": "GRI-405-2",
+    "category": "Social",
+    "title": "Ratio of basic salary — women to men"
+  },
+  {
+    "id": "GRI-406-1",
+    "category": "Social",
+    "title": "Incidents of discrimination"
+  },
+  {
+    "id": "GRI-413-1",
+    "category": "Social",
+    "title": "Operations with local community engagement"
+  }
+]

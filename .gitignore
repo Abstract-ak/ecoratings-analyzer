@@ -18,7 +18,7 @@ lerna-debug.log*
 # Environment files
 .env
 .env.*
-/backend/.env
+/backend/.env  
 /frontend/.env
 
 # Editor and OS files

@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import fs from "node:fs";
 import uploadRoutes from "./routes/upload.js";
+import analyzeRoutes from "./routes/analyze.js";
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -24,7 +25,7 @@ app.get("/health", (_req, res) => {
 
 // ─── Routes ────────────────────────────────────────────────────
 app.use("/api/upload", uploadRoutes);
-
+app.use("/api/analyze", analyzeRoutes);
 // ─── 404 handler ───────────────────────────────────────────────
 app.use((_req, res) => {
   res.status(404).json({ error: "Route not found" });

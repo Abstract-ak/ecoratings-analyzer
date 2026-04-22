@@ -159,23 +159,7 @@ async function extractMetrics(documentId) {
     .search(documentId, "emissions energy water waste diversity", 8)
     .map((c) => c.text)
     .join("\n\n");
-
-  const messages = [
-    {
-      role: "user",
-      content:
-        "Use the extract_metrics tool to pull all key ESG metrics from this document context:\n\n" +
-        context,
-    },
-  ];
-
-  const result = await agentLoop(messages, documentId);
-  // The tool itself returns structured JSON — parse it back
-  try {
-    return JSON.parse(result);
-  } catch {
-    return { raw: result };
-  }
+  return extractMetricsTool.run(context);
 }
 
 async function checkCompliance(documentId, framework = "GRI") {
@@ -184,21 +168,7 @@ async function checkCompliance(documentId, framework = "GRI") {
     .map((c) => c.text)
     .join("\n\n");
 
-  const messages = [
-    {
-      role: "user",
-      content:
-        `Use the check_framework_compliance tool to evaluate this document against the ${framework} framework.\n\n` +
-        context,
-    },
-  ];
-
-  const result = await agentLoop(messages, documentId, framework);
-  try {
-    return JSON.parse(result);
-  } catch {
-    return { raw: result };
-  }
+  return checkComplianceTool.run(context, framework);
 }
 
 async function chat(documentId, message, history = []) {

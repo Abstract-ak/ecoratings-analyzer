@@ -59,9 +59,13 @@ async function run(context) {
   });
 
   const text = response.choices[0]?.message?.content || "{}";
+  const cleaned = text.replace(/```json|```/g, "").trim();
+  const normalized = cleaned
+    .replace(/(-?\d{1,3})(,\d{3})+(?=\b)/g, (m) => m.replace(/,/g, ""))
+    .replace(/(?<=\d)_+(?=\d)/g, "");
 
   try {
-    return JSON.parse(text.replace(/```json|```/g, "").trim());
+    return JSON.parse(normalized);
   } catch {
     return { parseError: true, raw: text };
   }

@@ -35,6 +35,7 @@ export default function DashboardPage() {
   }
 
   if (!analysis) return <Spinner />;
+  // console.log("analysis-value", analysis);
 
   const { metrics } = analysis;
   const env = metrics?.environmental || {};

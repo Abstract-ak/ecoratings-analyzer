@@ -46,16 +46,16 @@ An AI-powered web application that parses company sustainability reports, extrac
 
 ## Tech Stack
 
-| Layer            | Technology                                  | Reason                                                |
-| ---------------- | ------------------------------------------- | ----------------------------------------------------- |
-| Frontend         | React 18 + Vite                             | Fast DX, HMR, lightweight                             |
-| Routing          | React Router v6                             | SPA navigation                                        |
-| Charts           | Recharts                                    | Radar + progress charts for gap analysis              |
-| Backend          | Node.js + Express                           | Same JS stack, great PDF ecosystem                    |
-| LLM              | OpenAI gpt-4o-mini                          | Tool use / function calling, strong structured output |
-| PDF parsing      | pdf-parse                                   | Simple, reliable, no native deps                      |
-| RAG              | TF-IDF cosine similarity (in-memory)        | Meets brief, zero infra, easy to swap                 |
-| Containerisation | Docker + Docker Compose                     | One-command local run                                 |
+| Layer            | Technology                           | Reason                                                |
+| ---------------- | ------------------------------------ | ----------------------------------------------------- |
+| Frontend         | React 18 + Vite                      | Fast DX, HMR, lightweight                             |
+| Routing          | React Router v6                      | SPA navigation                                        |
+| Charts           | Recharts                             | Radar + progress charts for gap analysis              |
+| Backend          | Node.js + Express                    | Same JS stack, great PDF ecosystem                    |
+| LLM              | OpenAI gpt-4o-mini                   | Tool use / function calling, strong structured output |
+| PDF parsing      | pdf-parse                            | Simple, reliable, no native deps                      |
+| RAG              | TF-IDF cosine similarity (in-memory) | Meets brief, zero infra, easy to swap                 |
+| Containerisation | Docker + Docker Compose              | One-command local run                                 |
 
 ---
 
@@ -281,7 +281,7 @@ ecoratings-analyzer/
 
 ---
 
-## What I'd Improve With More Time
+<!-- ## What I'd Improve With More Time
 
 1. **Persistent vector store** — swap in-memory TF-IDF for Chroma or Qdrant with proper embeddings (`text-embedding-3-small`). Better semantic retrieval for vague queries.
 2. **Streaming chat** — use OpenAI streaming and Server-Sent Events so responses appear word-by-word.
@@ -291,14 +291,8 @@ ecoratings-analyzer/
 6. **Chart enhancements** — emissions trend bar chart, year-on-year comparison if multiple reports are uploaded.
 7. **PDF page highlights** — show which page in the PDF each evidence quote came from.
 
----
+--- -->
 
 ## AI Assistance Disclosure
 
 This project was scaffolded with AI assistance (OpenAI). Architecture decisions, tool definitions, prompt engineering, and integration logic were designed and reviewed by the developer. All AI-generated code was read, understood, and tested before inclusion.
-
----
-
-## License
-
-MIT

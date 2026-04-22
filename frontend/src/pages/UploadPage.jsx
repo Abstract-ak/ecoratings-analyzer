@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { uploadDocument, analyzeDocument } from "../api/client.js";
+import "./UploadPage.css";
 
 const steps = [
   "Uploading document…",
@@ -60,11 +61,9 @@ export default function UploadPage() {
   }
 
   return (
-    <div style={{ maxWidth: 640, margin: "3rem auto" }}>
-      <h1 style={{ fontSize: "1.8rem", fontWeight: 700, marginBottom: 8 }}>
-        ESG Report Analyzer
-      </h1>
-      <p style={{ color: "#4b5563", marginBottom: "2rem" }}>
+    <div className="upload-page">
+      <h1 className="upload-page__title">ESG Report Analyzer</h1>
+      <p className="upload-page__subtitle">
         Upload a company sustainability report. Our AI agent extracts metrics
         and checks GRI framework compliance in seconds.
       </p>
@@ -82,16 +81,9 @@ export default function UploadPage() {
           handleFile(e.dataTransfer.files[0]);
         }}
         onClick={() => inputRef.current.click()}
-        style={{
-          border: `2px dashed ${dragging ? "#22c55e" : file ? "#16a34a" : "#d1d5db"}`,
-          borderRadius: 14,
-          background: dragging ? "#f0fdf4" : file ? "#f0fdf4" : "#fff",
-          padding: "3rem 2rem",
-          textAlign: "center",
-          cursor: "pointer",
-          transition: "all .2s",
-          marginBottom: "1.5rem",
-        }}
+        className={`dropzone${dragging ? " is-dragging" : ""}${
+          file ? " has-file" : ""
+        }`}
       >
         <input
           ref={inputRef}
@@ -100,134 +92,59 @@ export default function UploadPage() {
           style={{ display: "none" }}
           onChange={(e) => handleFile(e.target.files[0])}
         />
-        <div style={{ fontSize: "2.5rem", marginBottom: 12 }}>
-          {file ? "✅" : "📄"}
-        </div>
+        <div className="dropzone__icon">{file ? "✅" : "📄"}</div>
         {file ? (
           <>
-            <p style={{ fontWeight: 600, color: "#15803d" }}>{file.name}</p>
-            <p style={{ fontSize: "0.85rem", color: "#6b7280", marginTop: 4 }}>
+            <p className="dropzone__filename">{file.name}</p>
+            <p className="dropzone__meta">
               {(file.size / 1024).toFixed(1)} KB — click to change
             </p>
           </>
         ) : (
           <>
-            <p style={{ fontWeight: 600, color: "#374151" }}>
-              Drag & drop your report here
-            </p>
-            <p style={{ fontSize: "0.85rem", color: "#9ca3af", marginTop: 4 }}>
-              PDF or plain text · Max 20 MB
-            </p>
+            <p className="dropzone__hint">Drag & drop your report here</p>
+            <p className="dropzone__subhint">PDF or plain text · Max 20 MB</p>
           </>
         )}
       </div>
 
       {/* Loading stepper */}
       {loading && (
-        <div
-          style={{
-            background: "#f0fdf4",
-            border: "1px solid #bbf7d0",
-            borderRadius: 10,
-            padding: "1.25rem 1.5rem",
-            marginBottom: "1.5rem",
-          }}
-        >
-          {steps.map((s, i) => (
-            <div
-              key={s}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 10,
-                marginBottom: i < steps.length - 1 ? 10 : 0,
-              }}
-            >
-              <span
-                style={{
-                  width: 22,
-                  height: 22,
-                  borderRadius: "50%",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontSize: "0.75rem",
-                  fontWeight: 700,
-                  flexShrink: 0,
-                  background:
-                    i < stepIndex
-                      ? "#22c55e"
-                      : i === stepIndex
-                        ? "#16a34a"
-                        : "#e5e7eb",
-                  color: i <= stepIndex ? "#fff" : "#9ca3af",
-                }}
-              >
-                {i < stepIndex ? "✓" : i + 1}
-              </span>
-              <span
-                style={{
-                  fontSize: "0.9rem",
-                  color:
-                    i === stepIndex
-                      ? "#15803d"
-                      : i < stepIndex
-                        ? "#6b7280"
-                        : "#9ca3af",
-                  fontWeight: i === stepIndex ? 600 : 400,
-                }}
-              >
-                {s}
-              </span>
-            </div>
-          ))}
+        <div className="stepper">
+          {steps.map((s, i) => {
+            const isComplete = i < stepIndex;
+            const isActive = i === stepIndex;
+            const badgeClass = `stepper__badge${
+              isComplete ? " is-complete" : ""
+            }${isActive ? " is-active" : ""}`;
+            const labelClass = `stepper__label${
+              isComplete ? " is-complete" : ""
+            }${isActive ? " is-active" : ""}`;
+
+            return (
+              <div key={s} className="stepper__item">
+                <span className={badgeClass}>{isComplete ? "✓" : i + 1}</span>
+                <span className={labelClass}>{s}</span>
+              </div>
+            );
+          })}
         </div>
       )}
 
-      {error && (
-        <div
-          style={{
-            background: "#fee2e2",
-            color: "#b91c1c",
-            borderRadius: 8,
-            padding: "0.75rem 1rem",
-            marginBottom: "1rem",
-            fontSize: "0.9rem",
-          }}
-        >
-          {error}
-        </div>
-      )}
+      {error && <div className="error-banner">{error}</div>}
 
       <button
         onClick={handleSubmit}
         disabled={!file || loading}
-        style={{
-          width: "100%",
-          padding: "0.85rem",
-          borderRadius: 10,
-          background: !file || loading ? "#d1d5db" : "#16a34a",
-          color: "#fff",
-          fontWeight: 600,
-          fontSize: "1rem",
-          transition: "background .2s",
-          cursor: !file || loading ? "not-allowed" : "pointer",
-        }}
+        className="submit-button"
       >
         {loading ? steps[stepIndex] : "Analyze Report"}
       </button>
 
       {/* Sample data note */}
-      <p
-        style={{
-          textAlign: "center",
-          fontSize: "0.8rem",
-          color: "#9ca3af",
-          marginTop: "1rem",
-        }}
-      >
+      <p className="sample-note">
         No report? Use the{" "}
-        <a href="/sample-esg-report.txt" download style={{ color: "#16a34a" }}>
+        <a href="/sample-esg-report.txt" download>
           sample ESG report
         </a>{" "}
         included in the repo.

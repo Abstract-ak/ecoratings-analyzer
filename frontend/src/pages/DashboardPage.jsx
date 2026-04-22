@@ -3,6 +3,7 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import { sendChatMessage } from "../api/client.js";
 import MetricCard from "../components/MetricCard.jsx";
 import ChatInterface from "../components/ChatInterface.jsx";
+import "./DashboardPage.css";
 
 export default function DashboardPage() {
   const { documentId } = useParams();
@@ -21,17 +22,11 @@ export default function DashboardPage() {
 
   if (error) {
     return (
-      <div style={{ textAlign: "center", marginTop: "4rem" }}>
-        <p style={{ color: "#b91c1c", marginBottom: "1rem" }}>{error}</p>
+      <div className="dashboard-error">
+        <p className="dashboard-error-text">{error}</p>
         <button
           onClick={() => navigate("/")}
-          style={{
-            background: "#16a34a",
-            color: "#fff",
-            padding: "0.6rem 1.4rem",
-            borderRadius: 8,
-            fontWeight: 600,
-          }}
+          className="dashboard-error-button"
         >
           Go back
         </button>
@@ -47,39 +42,18 @@ export default function DashboardPage() {
   const gov = metrics?.governance || {};
 
   return (
-    <div>
+    <div className="dashboard-page">
       {/* Header */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "flex-start",
-          marginBottom: "1.5rem",
-          flexWrap: "wrap",
-          gap: 12,
-        }}
-      >
+      <div className="dashboard-header">
         <div>
-          <h1 style={{ fontSize: "1.6rem", fontWeight: 700 }}>ESG Dashboard</h1>
-          <p style={{ color: "#6b7280", fontSize: "0.9rem" }}>
+          <h1 className="dashboard-title">ESG Dashboard</h1>
+          <p className="dashboard-meta">
             {metrics?.companyName || "Company"} ·{" "}
             {metrics?.reportingYear || "—"} ·{" "}
-            <span style={{ fontFamily: "monospace", fontSize: "0.8rem" }}>
-              {documentId.slice(0, 8)}…
-            </span>
+            <span className="dashboard-doc-id">{documentId.slice(0, 8)}…</span>
           </p>
         </div>
-        <Link
-          to={`/gap-analysis/${documentId}`}
-          style={{
-            background: "#16a34a",
-            color: "#fff",
-            padding: "0.6rem 1.2rem",
-            borderRadius: 8,
-            fontWeight: 600,
-            fontSize: "0.9rem",
-          }}
-        >
+        <Link to={`/gap-analysis/${documentId}`} className="dashboard-action">
           View Gap Analysis →
         </Link>
       </div>
@@ -161,12 +135,8 @@ export default function DashboardPage() {
       </Section>
 
       {/* Chat */}
-      <div style={{ marginTop: "2rem" }}>
-        <h2
-          style={{ fontSize: "1.2rem", fontWeight: 700, marginBottom: "1rem" }}
-        >
-          Ask the Document
-        </h2>
+      <div className="chat-section">
+        <h2 className="chat-title">Ask the Document</h2>
         <ChatInterface documentId={documentId} sendMessage={sendChatMessage} />
       </div>
     </div>
@@ -175,28 +145,11 @@ export default function DashboardPage() {
 
 function Section({ title, color, children }) {
   return (
-    <div style={{ marginBottom: "2rem" }}>
-      <h2
-        style={{
-          fontSize: "1rem",
-          fontWeight: 700,
-          color,
-          textTransform: "uppercase",
-          letterSpacing: "0.05em",
-          marginBottom: "0.75rem",
-        }}
-      >
+    <div className="section">
+      <h2 className="section-title" style={{ "--section-color": color }}>
         {title}
       </h2>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(190px, 1fr))",
-          gap: "0.75rem",
-        }}
-      >
-        {children}
-      </div>
+      <div className="section-grid">{children}</div>
     </div>
   );
 }

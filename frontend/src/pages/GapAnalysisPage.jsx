@@ -9,6 +9,7 @@ import {
   ResponsiveContainer,
   Tooltip,
 } from "recharts";
+import "./GapAnalysisPage.css";
 
 const STATUS_CONFIG = {
   present: {
@@ -87,43 +88,22 @@ export default function GapAnalysisPage() {
   }, {});
 
   return (
-    <div>
+    <div className="gap-page">
       {/* Header */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: "1.5rem",
-          flexWrap: "wrap",
-          gap: 12,
-        }}
-      >
+      <div className="gap-header">
         <div>
-          <h1 style={{ fontSize: "1.6rem", fontWeight: 700 }}>
-            GRI Gap Analysis
-          </h1>
-          <p style={{ color: "#6b7280", fontSize: "0.9rem" }}>
+          <h1 className="gap-title">GRI Gap Analysis</h1>
+          <p className="gap-subtitle">
             Framework compliance report · {total} disclosures checked
           </p>
         </div>
-        <Link
-          to={`/dashboard/${documentId}`}
-          style={{ color: "#16a34a", fontWeight: 600, fontSize: "0.9rem" }}
-        >
+        <Link to={`/dashboard/${documentId}`} className="gap-back-link">
           ← Back to Dashboard
         </Link>
       </div>
 
       {/* Summary cards */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
-          gap: "0.75rem",
-          marginBottom: "2rem",
-        }}
-      >
+      <div className="summary-grid">
         <SummaryCard
           label="Overall Score"
           value={`${score}%`}
@@ -135,69 +115,31 @@ export default function GapAnalysisPage() {
       </div>
 
       {/* Overall progress bar */}
-      <div
-        style={{
-          background: "#fff",
-          borderRadius: 12,
-          padding: "1.25rem 1.5rem",
-          marginBottom: "1.5rem",
-          boxShadow: "0 1px 4px rgba(0,0,0,.07)",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            marginBottom: 8,
-            fontSize: "0.85rem",
-            fontWeight: 600,
-            color: "#374151",
-          }}
-        >
+      <div className="progress-card">
+        <div className="progress-header">
           <span>GRI Compliance Coverage</span>
           <span>{score}%</span>
         </div>
-        <div
-          style={{
-            background: "#e5e7eb",
-            borderRadius: 99,
-            height: 12,
-            overflow: "hidden",
-          }}
-        >
-          <div style={{ display: "flex", height: "100%" }}>
+        <div className="progress-track">
+          <div className="progress-bar">
             <div
-              style={{
-                width: `${(counts.present / total) * 100}%`,
-                background: "#22c55e",
-                transition: "width .6s",
-              }}
+              className="progress-segment is-present"
+              style={{ width: `${(counts.present / total) * 100}%` }}
             />
             <div
-              style={{
-                width: `${(counts.partial / total) * 100}%`,
-                background: "#f59e0b",
-                transition: "width .6s",
-              }}
+              className="progress-segment is-partial"
+              style={{ width: `${(counts.partial / total) * 100}%` }}
             />
           </div>
         </div>
-        <div
-          style={{
-            display: "flex",
-            gap: 16,
-            marginTop: 8,
-            fontSize: "0.78rem",
-            color: "#6b7280",
-          }}
-        >
-          <span style={{ display: "flex", alignItems: "center", gap: 4 }}>
+        <div className="progress-legend">
+          <span className="progress-legend-item">
             <Dot color="#22c55e" /> Present
           </span>
-          <span style={{ display: "flex", alignItems: "center", gap: 4 }}>
+          <span className="progress-legend-item">
             <Dot color="#f59e0b" /> Partial
           </span>
-          <span style={{ display: "flex", alignItems: "center", gap: 4 }}>
+          <span className="progress-legend-item">
             <Dot color="#e5e7eb" /> Missing
           </span>
         </div>
@@ -205,25 +147,8 @@ export default function GapAnalysisPage() {
 
       {/* Radar chart */}
       {radarData.length > 2 && (
-        <div
-          style={{
-            background: "#fff",
-            borderRadius: 12,
-            padding: "1.25rem 1.5rem",
-            marginBottom: "1.5rem",
-            boxShadow: "0 1px 4px rgba(0,0,0,.07)",
-          }}
-        >
-          <h2
-            style={{
-              fontSize: "0.95rem",
-              fontWeight: 700,
-              marginBottom: "0.75rem",
-              color: "#374151",
-            }}
-          >
-            Coverage by Category
-          </h2>
+        <div className="radar-card">
+          <h2 className="radar-title">Coverage by Category</h2>
           <ResponsiveContainer width="100%" height={260}>
             <RadarChart data={radarData}>
               <PolarGrid stroke="#e5e7eb" />
@@ -245,21 +170,12 @@ export default function GapAnalysisPage() {
       )}
 
       {/* Filter pills */}
-      <div style={{ display: "flex", gap: 8, marginBottom: "1.25rem" }}>
+      <div className="filter-pills">
         {["all", "present", "partial", "missing"].map((f) => (
           <button
             key={f}
             onClick={() => setFilter(f)}
-            style={{
-              padding: "0.35rem 0.9rem",
-              borderRadius: 99,
-              fontSize: "0.82rem",
-              fontWeight: 600,
-              border: "none",
-              background: filter === f ? "#16a34a" : "#e5e7eb",
-              color: filter === f ? "#fff" : "#374151",
-              cursor: "pointer",
-            }}
+            className={`filter-pill${filter === f ? " is-active" : ""}`}
           >
             {f.charAt(0).toUpperCase() + f.slice(1)}
             {f !== "all" && ` (${counts[f] ?? 0})`}
@@ -269,74 +185,29 @@ export default function GapAnalysisPage() {
 
       {/* Checklist grouped by category */}
       {Object.entries(grouped).map(([cat, catItems]) => (
-        <div key={cat} style={{ marginBottom: "1.5rem" }}>
-          <h3
-            style={{
-              fontSize: "0.85rem",
-              fontWeight: 700,
-              textTransform: "uppercase",
-              letterSpacing: "0.05em",
-              color: "#6b7280",
-              marginBottom: "0.6rem",
-            }}
-          >
-            {cat}
-          </h3>
-          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+        <div key={cat} className="category-group">
+          <h3 className="category-title">{cat}</h3>
+          <div className="gap-item-list">
             {catItems.map((item) => {
               const cfg = STATUS_CONFIG[item.status] || STATUS_CONFIG.missing;
               return (
                 <div
                   key={item.id}
+                  className="gap-item"
                   style={{
-                    background: cfg.bg,
-                    border: `1px solid ${cfg.border}`,
-                    borderRadius: 10,
-                    padding: "0.75rem 1rem",
-                    display: "flex",
-                    alignItems: "flex-start",
-                    gap: 12,
+                    "--item-bg": cfg.bg,
+                    "--item-border": cfg.border,
+                    "--status-bg": cfg.color,
                   }}
                 >
-                  <StatusBadge status={item.status} cfg={cfg} />
-                  <div style={{ flex: 1 }}>
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: 8,
-                        flexWrap: "wrap",
-                      }}
-                    >
-                      <span
-                        style={{
-                          fontWeight: 600,
-                          fontSize: "0.9rem",
-                          color: "#111827",
-                        }}
-                      >
-                        {item.title}
-                      </span>
-                      <span
-                        style={{
-                          fontSize: "0.75rem",
-                          color: "#6b7280",
-                          fontFamily: "monospace",
-                        }}
-                      >
-                        {item.id}
-                      </span>
+                  <StatusBadge status={item.status} />
+                  <div className="gap-item-body">
+                    <div className="gap-item-header">
+                      <span className="gap-item-title">{item.title}</span>
+                      <span className="gap-item-id">{item.id}</span>
                     </div>
                     {item.evidence && (
-                      <p
-                        style={{
-                          fontSize: "0.82rem",
-                          color: "#4b5563",
-                          marginTop: 3,
-                        }}
-                      >
-                        {item.evidence}
-                      </p>
+                      <p className="gap-item-evidence">{item.evidence}</p>
                     )}
                   </div>
                 </div>
@@ -351,56 +222,18 @@ export default function GapAnalysisPage() {
 
 function SummaryCard({ label, value, color }) {
   return (
-    <div
-      style={{
-        background: "#fff",
-        borderRadius: 12,
-        padding: "1rem",
-        textAlign: "center",
-        boxShadow: "0 1px 4px rgba(0,0,0,.07)",
-      }}
-    >
-      <div style={{ fontSize: "1.7rem", fontWeight: 700, color }}>{value}</div>
-      <div style={{ fontSize: "0.8rem", color: "#6b7280", marginTop: 2 }}>
-        {label}
-      </div>
+    <div className="summary-card" style={{ "--summary-color": color }}>
+      <div className="summary-value">{value}</div>
+      <div className="summary-label">{label}</div>
     </div>
   );
 }
 
-function StatusBadge({ status, cfg }) {
+function StatusBadge({ status }) {
   const symbols = { present: "✓", partial: "~", missing: "✗" };
-  return (
-    <div
-      style={{
-        width: 26,
-        height: 26,
-        borderRadius: "50%",
-        background: cfg.color,
-        color: "#fff",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        fontWeight: 700,
-        fontSize: "0.85rem",
-        flexShrink: 0,
-      }}
-    >
-      {symbols[status] || "?"}
-    </div>
-  );
+  return <div className="status-badge">{symbols[status] || "?"}</div>;
 }
 
 function Dot({ color }) {
-  return (
-    <span
-      style={{
-        width: 10,
-        height: 10,
-        borderRadius: "50%",
-        background: color,
-        display: "inline-block",
-      }}
-    />
-  );
+  return <span className="progress-dot" style={{ "--dot-color": color }} />;
 }

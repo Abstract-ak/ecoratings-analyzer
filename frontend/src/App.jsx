@@ -3,7 +3,7 @@ import Navbar from "./components/Navbar";
 
 import UploadPage from "./pages/UploadPage.jsx";
 import DashboardPage from "./pages/DashboardPage.jsx";
-// import GapAnalysisPage from "./pages/GapAnalysisPage.jsx";
+import GapAnalysisPage from "./pages/GapAnalysisPage.jsx";
 
 export default function App() {
   return (
@@ -24,8 +24,8 @@ export default function App() {
           <Route path="/" element={<UploadPage />} />
           <Route path="/dashboard/:documentId" element={<DashboardPage />} />
           <Route
-          // path="/gap-analysis/:documentId"
-          // element={<GapAnalysisPage />}
+            path="/gap-analysis/:documentId"
+            element={<GapAnalysisPage />}
           />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

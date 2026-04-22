@@ -51,7 +51,7 @@ export default function Navbar() {
           Upload
         </Link>
         <a
-          href="https://github.com"
+          href="https://github.com/Abstract-ak/ecoratings-analyzer"
           target="_blank"
           rel="noreferrer"
           style={styles.link(false)}

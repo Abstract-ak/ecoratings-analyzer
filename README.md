@@ -283,9 +283,9 @@ ecoratings-analyzer/
 
 ---
 
-<!-- ## What I'd Improve With More Time
+## What I'd Improve With More Time
 
-1. **Persistent vector store** — swap in-memory TF-IDF for Chroma or Qdrant with proper embeddings (`text-embedding-3-small`). Better semantic retrieval for vague queries.
+1. **Persistent vector store** — swap in-memory TF-IDF for Chroma or Qdrant with proper embeddings (`text-embedding-3-small`) for stronger semantic recall.
 2. **Streaming chat** — use OpenAI streaming and Server-Sent Events so responses appear word-by-word.
 3. **Multi-agent orchestration** — separate Extractor Agent and Compliance Agent coordinated by a Router Agent, each with their own system prompt and tool set.
 4. **Authentication** — session management so multiple users can have isolated document sessions.
@@ -293,7 +293,7 @@ ecoratings-analyzer/
 6. **Chart enhancements** — emissions trend bar chart, year-on-year comparison if multiple reports are uploaded.
 7. **PDF page highlights** — show which page in the PDF each evidence quote came from.
 
---- -->
+---
 
 ## AI Assistance Disclosure
 

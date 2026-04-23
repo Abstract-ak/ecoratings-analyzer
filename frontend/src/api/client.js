@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "/api", // Vite proxy forwards to http://localhost:3001
+  baseURL: import.meta.env.VITE_API_BASE || "/api",
   timeout: 120_000, // 2 min — LLM calls can be slow
 });
 
@@ -16,7 +16,7 @@ export async function uploadDocument(file, onProgress) {
       if (onProgress) onProgress(Math.round((e.loaded * 100) / e.total));
     },
   });
-  console.log("upload-document: ", data);
+  // console.log("upload-document: ", data);
   return data; // { documentId, fileName, characterCount }
 }
 

@@ -1,16 +1,10 @@
 import { readFile } from "node:fs/promises";
-import { PDFParse } from "pdf-parse";
+import pdf from "pdf-parse";
 
 async function parsePDF(filePath) {
   const buffer = await readFile(filePath);
-  const parser = new PDFParse({ data: buffer });
-
-  try {
-    const result = await parser.getText();
-    return result.text;
-  } finally {
-    await parser.destroy();
-  }
+  const result = await pdf(buffer);
+  return result.text;
 }
 
 async function extract(filePath, mimeType) {

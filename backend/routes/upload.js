@@ -1,7 +1,7 @@
 import express from "express";
 import multer from "multer";
 import path from "path";
-import { v4 as uuidv4 } from "uuid";
+import { randomUUID } from "node:crypto";
 import pdfParser from "../services/pdfParser.js";
 import chunker from "../services/chunker.js";
 import vectorStore from "../services/vectorStore.js";
@@ -13,7 +13,7 @@ const storage = multer.diskStorage({
   destination: process.env.UPLOAD_DIR || "./uploads",
   filename: (_req, file, cb) => {
     const ext = path.extname(file.originalname);
-    cb(null, `${uuidv4()}${ext}`);
+    cb(null, `${randomUUID()}${ext}`);
   },
 });
 
@@ -38,7 +38,7 @@ router.post("/", upload.single("document"), async (req, res) => {
       return res.status(400).json({ error: "No file uploaded" });
     }
 
-    const documentId = uuidv4();
+    const documentId = randomUUID();
     const filePath = req.file.path;
 
     // 1. Extract raw text from PDF / txt

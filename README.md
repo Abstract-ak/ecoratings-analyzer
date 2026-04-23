@@ -99,6 +99,10 @@ npm install
 # Frontend (new terminal)
 cd ../frontend
 npm install
+
+# Optional: when running locally without Docker, set the API base
+# in frontend/.env so the frontend calls the backend directly.
+# VITE_API_BASE=http://localhost:3001/api
 ```
 
 ### 2. Start development servers
@@ -113,11 +117,9 @@ cd frontend && npm run dev
 
 Open [http://localhost:5173](http://localhost:5173)
 
-### 3. Run tests
+### 3. Tests
 
-```bash
-cd backend && npm test
-```
+No automated tests are configured yet.
 
 ---
 

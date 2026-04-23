@@ -243,11 +243,7 @@ ecoratings-analyzer/
 │   ├── data/
 │   │   └── gri-frameworks.json # 28 GRI disclosure items
 │   ├── middleware/
-│   │   └── errorHandler.js
-│   └── tests/
-│       ├── api.test.js
-│       ├── chunker.test.js
-│       └── vectorStore.test.js
+│       └── errorHandler.js
 │
 ├── frontend/
 │   ├── vite.config.js
@@ -268,7 +264,7 @@ ecoratings-analyzer/
 │           ├── DashboardPage.jsx   # Metrics grid + chat
 │           └── GapAnalysisPage.jsx # Radar chart + checklist
 │
-└── sample-data/
+└── public/
     └── mock-esg-report.txt     # EcoTest Corp 2024 mock report
 ```
 

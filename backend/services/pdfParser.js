@@ -1,9 +1,11 @@
 import { readFile } from "node:fs/promises";
-import pdf from "pdf-parse";
+import { PDFParse } from "pdf-parse";
 
 async function parsePDF(filePath) {
   const buffer = await readFile(filePath);
-  const result = await pdf(buffer);
+  const parser = new PDFParse({ data: buffer });
+  const result = await parser.getText();
+  await parser.destroy();
   return result.text;
 }
 
